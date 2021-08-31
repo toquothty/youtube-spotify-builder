@@ -8,7 +8,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 
-
+scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 # Step 1: Login to youtube
 def youtube_connect():
     # Directly copied from youtube data API.
@@ -26,9 +26,7 @@ def youtube_connect():
     credentials = flow.run_console()
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, credentials=credentials)
-
-# Step 2: Get playlist "Music"
-def grab_youtube_list():
+    
     request = youtube.playlistItems().list(
         part="snippet,contentDetails",
         maxResults=25,
@@ -38,20 +36,19 @@ def grab_youtube_list():
 
     print(response)
 
-# Step 3: Create spotify playlist, TQ-Youtube
+# Step 2: Create spotify playlist, TQ-Youtube
 def create_playlist():
     pass
 
-# Step 4: Search spotify for song
+# Step 3: Search spotify for song
 def search_spotify():
     pass
 
-# Step 5: Add the song to TQ-Youtube.
+# Step 4: Add the song to TQ-Youtube.
 def add_song_playlist():
     pass
 
 youtube_connect()
-grab_youtube_list()
 create_playlist()
 search_spotify()
 add_song_playlist()
