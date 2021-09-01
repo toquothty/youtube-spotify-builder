@@ -10,6 +10,7 @@ import googleapiclient.errors
 import json
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
+song_list = []
 # Step 1: Login to youtube
 def youtube_connect():
     # Directly copied from youtube data API.
@@ -35,12 +36,17 @@ def youtube_connect():
     )
     response = request.execute()
 
-    for song in response['items']:
-        print(song['snippet']['title'])
+    global song_list
 
+    for song in response['items']:
+        song_list.append(song['snippet']['title'])
+        
+    return song_list
+    
 
 # Step 2: Create spotify playlist, TQ-Youtube
 def create_playlist():
+    print(song_list)
     pass
 
 # Step 3: Search spotify for song
