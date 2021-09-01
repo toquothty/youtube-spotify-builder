@@ -8,6 +8,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 import json
+import youtube-dl
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 song_list = []
