@@ -8,10 +8,11 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 import json
-import youtube-dl
+from youtube_dl import YoutubeDL
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 song_list = []
+
 # Step 1: Login to youtube
 def youtube_connect():
     # Directly copied from youtube data API.
@@ -41,7 +42,9 @@ def youtube_connect():
 
     for song in response['items']:
         song_list.append(song['snippet']['title'])
-        
+        song_URL = 'http://www.youtube.com/watch?v=' + song['snippet']['resourceId']['videoId']
+        song_info = YoutubeDL().extract_info(song_URL, download=False)
+        print(song_info)
     return song_list
     
 
