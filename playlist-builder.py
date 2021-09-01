@@ -7,6 +7,7 @@ import os
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
+import json
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 # Step 1: Login to youtube
@@ -34,7 +35,9 @@ def youtube_connect():
     )
     response = request.execute()
 
-    print(response)
+    for song in response['items']:
+        print(song['snippet']['title'])
+
 
 # Step 2: Create spotify playlist, TQ-Youtube
 def create_playlist():
