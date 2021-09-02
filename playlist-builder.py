@@ -41,10 +41,27 @@ def youtube_connect():
     global song_list
 
     for song in response['items']:
-        song_list.append(song['snippet']['title'])
         song_URL = 'http://www.youtube.com/watch?v=' + song['snippet']['resourceId']['videoId']
         song_info = YoutubeDL().extract_info(song_URL, download=False)
-        print(song_info)
+
+        try:
+            song_track = song_info['track']
+        except KeyError:
+            song_track = None
+        try:
+            song_artist = song_info['artist']
+        except KeyError:
+            song_artist = None
+
+        if song_track is not None and song_artist is not None:
+            print(str(song_track) + ' by ' + str(song_artist))
+            song_list.append(song_info['track'])
+        elif song_track is not None and song_artist is None:
+            print(str(song_track))
+            song_list.append(song_info['track'])
+        else:
+            return
+
     return song_list
     
 
